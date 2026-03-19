@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReConnect Health Centre — Moncton, NB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* ── CSS VARIABLES ───────────────────────────────── */
+[data-theme="light"] {
+  --bg:          #F8F6F2;
+  --bg-2:        #F0EDE7;
+  --bg-card:     #FFFFFF;
+  --bg-accent:   #E8E2D9;
+  --text:        #2A2825;
+  --text-2:      #6B6560;
+  --text-3:      #9B958F;
+  --blue:        #6E9BAA;
+  --blue-light:  #C8DCE3;
+  --blue-dark:   #3E6D7D;
+  --gold:        #B8986A;
+  --gold-light:  #E8D9C0;
+  --border:      #DDD8D0;
+  --nav-bg:      rgba(248,246,242,0.92);
+  --shadow:      0 2px 24px rgba(42,40,37,0.08);
+  --shadow-lg:   0 8px 48px rgba(42,40,37,0.12);
+}
+[data-theme="dark"] {
+  --bg:          #0E1419;
+  --bg-2:        #141C24;
+  --bg-card:     #1A2433;
+  --bg-accent:   #1F2D3D;
+  --text:        #EAE6DF;
+  --text-2:      #9BA8B2;
+  --text-3:      #5F7080;
+  --blue:        #7AAFBF;
+  --blue-light:  #1A3040;
+  --blue-dark:   #9FCAD7;
+  --gold:        #C9A872;
+  --gold-light:  #2A2015;
+  --border:      #222E3C;
+  --nav-bg:      rgba(14,20,25,0.95);
+  --shadow:      0 2px 24px rgba(0,0,0,0.3);
+  --shadow-lg:   0 8px 48px rgba(0,0,0,0.4);
+}
+
+/* ── UTILITIES ───────────────────────────────────── */
+body { background: var(--bg); color: var(--text); }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+.serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+/* ── NAVIGATION ──────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s, border-color 0.4s;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-ring {
+  width: 36px; height: 36px;
+  position: relative;
+}
+.logo-ring svg { width: 100%; height: 100%; }
+.logo-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.logo-text span {
+  display: block;
+  font-size: 9px;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 400;
+  margin-top: 2px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--text-2);
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+
+/* Dark mode toggle */
+.theme-toggle {
+  width: 44px; height: 24px;
+  background: var(--bg-accent);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s, border-color 0.3s;
+  outline: none;
+  flex-shrink: 0;
+}
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--gold);
+  transition: transform 0.3s, background 0.3s;
+}
+[data-theme="dark"] .theme-toggle::after { transform: translateX(20px); }
+.toggle-icons {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  pointer-events: none;
+  font-size: 9px;
+}
+
+.btn-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blue);
+  color: white;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 10px 22px;
+  border-radius: 40px;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+  box-shadow: 0 2px 12px rgba(110,155,170,0.3);
+}
+.btn-book:hover {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(110,155,170,0.4);
+}
+[data-theme="dark"] .btn-book { box-shadow: 0 2px 12px rgba(122,175,191,0.2); }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--text);
+  transition: all 0.3s;
+}
+
+/* Mobile nav */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 70px; left: 0; right: 0;
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 24px 32px 32px;
+  z-index: 99;
+  transform: translateY(-100%);
+  transition: transform 0.35s ease;
+}
+.mobile-nav.open { transform: translateY(0); display: block; }
+.mobile-nav ul { list-style: none; }
+.mobile-nav li { border-bottom: 1px solid var(--border); }
+.mobile-nav a {
+  display: block;
+  padding: 14px 0;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+.mobile-nav .btn-book { margin-top: 20px; width: 100%; justify-content: center; }
+
+/* ── HERO ────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 70px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 50%, var(--blue-light) 100%);
+  z-index: 0;
+}
+.hero-circles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  animation: slowRotate 30s linear infinite;
+}
+.hero-circle:nth-child(1) { width: 600px; height: 600px; top: -150px; right: -100px; animation-duration: 40s; }
+.hero-circle:nth-child(2) { width: 400px; height: 400px; top: -50px; right: 50px; animation-duration: 28s; animation-direction: reverse; border-color: var(--gold-light); }
+.hero-circle:nth-child(3) { width: 200px; height: 200px; top: 50px; right: 200px; animation-duration: 20s; }
+@keyframes slowRotate { to { transform: rotate(360deg); } }
+.hero-accent {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 480px; height: 480px;
+  background: radial-gradient(ellipse at bottom right, var(--blue-light) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 80px 0;
+}
+.hero-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.hero-text h1 em {
+  font-style: italic;
+  color: var(--blue);
+}
+.hero-text p {
+  font-size: 16px;
+  color: var(--text-2);
+  max-width: 420px;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 14px 30px;
+  border-radius: 40px;
+  transition: all 0.25s;
+}
+.btn-primary:hover { background: var(--blue-dark); color: white; transform: translateY(-1px); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 14px 30px;
+  border-radius: 40px;
+  border: 1px solid var(--border);
+  transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-logo-large {
+  width: 300px; height: 300px;
+  opacity: 0.12;
+  animation: floatLogo 6s ease-in-out infinite;
+}
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* ── SERVICES ────────────────────────────────────── */
+.services {
+  padding: 100px 0;
+  background: var(--bg-2);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.section-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.section-header p {
+  color: var(--text-2);
+  max-width: 520px;
+  margin: 0 auto;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.service-card {
+  background: var(--bg-card);
+  padding: 40px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+.service-card:hover { background: var(--bg-accent); }
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon {
+  width: 44px; height: 44px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+.service-icon svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.service-name {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+.service-desc {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+  display: none;
+}
+.service-arrow {
+  margin-top: auto;
+  font-size: 18px;
+  color: var(--text-3);
+  transition: color 0.2s, transform 0.2s;
+}
+.service-card:hover .service-arrow { color: var(--blue); transform: translateX(4px); }
+
+/* ── ABOUT STRIP ─────────────────────────────────── */
+.about-strip {
+  padding: 100px 0;
+  background: var(--bg);
+}
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.about-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+.about-text h2 em { font-style: italic; color: var(--gold); }
+.about-text p { color: var(--text-2); margin-bottom: 20px; line-height: 1.8; }
+.about-text .btn-primary { margin-top: 16px; }
+.about-visual {
+  position: relative;
+}
+.about-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--shadow);
+}
+.about-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+.pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pillar {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.pillar-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+.pillar-text { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+.pillar-text strong { color: var(--text); font-weight: 500; display: block; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 2px; }
+.about-float {
+  position: absolute;
+  bottom: -24px; right: -24px;
+  width: 120px; height: 120px;
+  background: linear-gradient(135deg, var(--blue-light), var(--gold-light));
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+}
+.about-float-text {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.3;
+}
+.about-float-num {
+  display: block;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--blue);
+}
+
+/* ── BLOG ────────────────────────────────────────── */
+.blog {
+  padding: 100px 0;
+  background: var(--bg-2);
+}
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.blog-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+}
+.blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.blog-img {
+  height: 200px;
+  background: linear-gradient(135deg, var(--blue-light), var(--bg-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.blog-img-icon { font-size: 48px; opacity: 0.3; }
+.blog-img-label {
+  position: absolute;
+  bottom: 16px; left: 16px;
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  border: 1px solid var(--border);
+}
+.blog-body { padding: 28px; }
+.blog-body h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.blog-body p { font-size: 14px; color: var(--text-2); line-height: 1.7; margin-bottom: 20px; }
+.blog-link {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+.blog-card:hover .blog-link { gap: 10px; }
+
+/* ── CTA BAND ────────────────────────────────────── */
+.cta-band {
+  padding: 80px 0;
+  background: var(--blue-dark);
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="dark"] .cta-band { background: var(--bg-accent); }
+.cta-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
+}
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.cta-inner h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  color: white;
+  margin-bottom: 16px;
+}
+[data-theme="dark"] .cta-inner h2 { color: var(--text); }
+.cta-inner p { color: rgba(255,255,255,0.7); max-width: 480px; margin: 0 auto 36px; }
+[data-theme="dark"] .cta-inner p { color: var(--text-2); }
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: var(--blue-dark);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 15px 36px;
+  border-radius: 40px;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
+
+/* ── CONTACT / FOOTER ────────────────────────────── */
+footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  padding: 80px 0 40px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+.footer-brand .logo { margin-bottom: 20px; }
+.footer-brand p { font-size: 14px; color: var(--text-2); max-width: 280px; line-height: 1.7; }
+.footer-socials { display: flex; gap: 12px; margin-top: 20px; }
+.social-btn {
+  width: 38px; height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-2);
+  font-size: 15px;
+  transition: all 0.2s;
+}
+.social-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+.footer-col h4 {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.footer-col ul { list-style: none; }
+.footer-col li {
+  font-size: 14px;
+  color: var(--text-2);
+  padding: 5px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.footer-col li a { color: var(--text-2); transition: color 0.2s; }
+.footer-col li a:hover { color: var(--blue); }
+.contact-icon { color: var(--blue); flex-shrink: 0; margin-top: 3px; }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ── SCROLL ANIMATIONS ───────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+  .hero-text p { margin: 0 auto 40px; }
+  .hero-cta { justify-content: center; }
+  .hero-visual { display: none; }
+  .hero-stats { justify-content: center; }
+  .about-inner { grid-template-columns: 1fr; gap: 48px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+@media (max-width: 768px) {
+  .nav-links, .btn-book { display: none; }
+  .hamburger { display: flex; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .hero-stats { flex-wrap: wrap; gap: 24px; justify-content: center; }
+}
+@media (max-width: 480px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .container { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────── -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-ring">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="17" stroke="var(--blue)" stroke-width="1.5" fill="none"/>
+          <circle cx="20" cy="20" r="11" stroke="var(--gold)" stroke-width="1" fill="none" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        ReConnect
+        <span>health centre</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#team">Our Team</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="toggle-icons"><span>☀️</span><span>🌙</span></span>
+      </button>
+      <a href="#contact" class="btn-book">Book Now</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#about" onclick="closeMobile()">About</a></li>
+    <li><a href="#services" onclick="closeMobile()">Services</a></li>
+    <li><a href="#community" onclick="closeMobile()">Community</a></li>
+    <li><a href="#blog" onclick="closeMobile()">Blog</a></li>
+    <li><a href="#team" onclick="closeMobile()">Our Team</a></li>
+  </ul>
+  <a href="#contact" class="btn-book" onclick="closeMobile()">📅 Book Now</a>
+</div>
+
+<!-- ── HERO ─────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-circles">
+    <div class="hero-circle"></div>
+    <div class="hero-circle"></div>
+    <div class="hero-circle"></div>
+  </div>
+  <div class="hero-accent"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="tag">Moncton, New Brunswick</p>
+        <h1>We believe in a <em>collaborative</em> approach to your health.</h1>
+        <p>ReConnect Health Centre offers a wide range of services with a caring community, engaging workshops, and a multidisciplinary team dedicated to your wellbeing.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary">📅 Book an Appointment</a>
+          <a href="#services" class="btn-secondary">Explore Services →</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">8+</div>
+            <div class="stat-label">Specialties</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Collaborative Care</div>
+          </div>
+          <div>
+            <div class="stat-num">1</div>
+            <div class="stat-label">Community</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="hero-logo-large" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="90" stroke="currentColor" stroke-width="2"/>
+          <circle cx="100" cy="100" r="60" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="100" cy="100" r="30" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ──────────────────────────────────── -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="tag">What We Offer</p>
+      <h2>Our Services</h2>
+      <p>A comprehensive range of therapeutic services delivered by a dedicated multidisciplinary team.</p>
+    </div>
+    <div class="services-grid fade-up">
+
+      <!-- Physiotherapy -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44"><path d="M22 8c0 0-8 4-8 14s8 14 8 14"/><path d="M22 8c0 0 8 4 8 14s-8 14-8 14"/><line x1="14" y1="22" x2="30" y2="22"/><circle cx="22" cy="8" r="2"/></svg>
+        </div>
+        <div class="service-name">Physiotherapy</div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <!-- Massage Therapy -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44"><rect x="8" y="14" width="28" height="18" rx="3"/><line x1="8" y1="20" x2="36" y2="20"/><line x1="15" y1="14" x2="15" y2="32"/><line x1="29" y1="14" x2="29" y2="32"/></svg>
+        </div>
+        <div class="service-name">Massage Therapy</div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <!-- Acupuncture -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44"><ellipse cx="22" cy="18" rx="10" ry="13"/><circle cx="22" cy="12" r="2"/><path d="M16 24c0 0-2 4 6 4s6-4 6-4"/><line x1="30" y1="10" x2="38" y2="6"/><line x1="30" y1="16" x2="38" y2="16"/><line x1="30" y1="22" x2="38" y2="22"/></svg>
+        </div>
+        <div class="service-name">Acupuncture &amp; Dry-Needling</div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <!-- Psychology -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44"><path d="M22 8c-8 0-14 5-14 12 0 4 2 7.5 6 10l-2 6 6-3c1.3.3 2.6.5 4 .5 8 0 14-5 14-12s-6-13.5-14-13.5z"/><path d="M17 21c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5"/></svg>
+        </div>
+        <div class="service-name">Psychology / Counselling</div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <!-- Gynecology -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44"><ellipse cx="22" cy="16" rx="6" ry="8"/><path d="M16 24s-4 2-4 8h20c0-6-4-8-4-8"/><line x1="22" y1="32" x2="22" y2="38"/><line x1="18" y1="36" x2="26" y2="36"/></svg>
+        </div>
+        <div class="service-name">Gynecology</div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <!-- Lactation -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44"><circle cx="18" cy="14" r="6"/><path d="M8 36s0-8 10-8h8c4 0 8 2 8 8"/><circle cx="32" cy="22" r="4"/><path d="M32 26v4"/></svg>
+        </div>
+        <div class="service-name">Lactation &amp; Infant Feeding</div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <!-- Chiropractic -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44"><line x1="22" y1="6" x2="22" y2="38"/><ellipse cx="22" cy="12" rx="5" ry="3"/><ellipse cx="22" cy="20" rx="5" ry="3"/><ellipse cx="22" cy="28" rx="5" ry="3"/><ellipse cx="22" cy="36" rx="4" ry="2.5"/></svg>
+        </div>
+        <div class="service-name">Chiropractic</div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <!-- Osteopathy -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 44 44"><rect x="14" y="6" width="16" height="22" rx="8"/><line x1="22" y1="28" x2="22" y2="38"/><line x1="16" y1="34" x2="28" y2="34"/><line x1="18" y1="14" x2="26" y2="14"/><line x1="18" y1="20" x2="26" y2="20"/></svg>
+        </div>
+        <div class="service-name">Osteopathy</div>
+        <div class="service-arrow">→</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────────── -->
+<section class="about-strip" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-text fade-up">
+        <p class="tag">Our Philosophy</p>
+        <h2>Health that is <em>collaborative,</em> whole, and deeply personal.</h2>
+        <p>ReConnect Health offers a wide range of services including acupuncture, pelvic floor physiotherapy, orthopaedic physiotherapy, breast health physiotherapy, psychology, massage therapy, and private gynecological services.</p>
+        <p>We also provide engaging workshops, therapeutic group exercise, a caring community, and more — because we believe healing happens together.</p>
+        <a href="#contact" class="btn-primary">Meet Our Team →</a>
+      </div>
+      <div class="about-visual fade-up">
+        <div class="about-card">
+          <div class="about-card-title">What sets us apart</div>
+          <div class="pillars">
+            <div class="pillar">
+              <div class="pillar-dot"></div>
+              <div class="pillar-text">
+                <strong>Multidisciplinary Care</strong>
+                Our practitioners work together to address every aspect of your health.
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-dot" style="background:var(--gold)"></div>
+              <div class="pillar-text">
+                <strong>Community-Centered</strong>
+                Workshops, group exercise, and a supportive space where you belong.
+              </div>
+            </div>
+            <div class="pillar">
+              <div class="pillar-dot" style="background:var(--text-3)"></div>
+              <div class="pillar-text">
+                <strong>Whole-Person Approach</strong>
+                Physical, emotional, and mental wellness — all under one roof.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-float">
+          <div class="about-float-text">
+            <span class="about-float-num">8+</span>
+            Services
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BLOG ──────────────────────────────────────── -->
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="tag">Resources</p>
+      <h2>From Our Blog</h2>
+      <p>Educational articles written by our practitioners to support your health journey.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card fade-up">
+        <div class="blog-img" style="background:linear-gradient(135deg,#dce8ed,#c8dceb)">
+          <span class="blog-img-icon">🤰</span>
+          <span class="blog-img-label">Pregnancy</span>
+        </div>
+        <div class="blog-body">
+          <h3>Round Ligament Pain in Pregnancy</h3>
+          <p>Causes, symptoms &amp; relief options. If you're pregnant and suddenly feeling a sharp, quick "pull" low in your belly — especially when rolling over, standing up, or walking — you are not alone.</p>
+          <a href="https://reconnecthealth.ca/round-ligament-pain-pregnancy/" class="blog-link" target="_blank">Read Article →</a>
+        </div>
+      </div>
+      <div class="blog-card fade-up" style="transition-delay:0.1s">
+        <div class="blog-img" style="background:linear-gradient(135deg,#e8d9c0,#dccfba)">
+          <span class="blog-img-icon">🤱</span>
+          <span class="blog-img-label">Lactation</span>
+        </div>
+        <div class="blog-body">
+          <h3>Blocked Duct Self-Treatment &amp; Mastitis Relief</h3>
+          <p>Safe, effective steps for managing blocked milk ducts and mastitis at home — written by our lactation specialists to help you through this common breastfeeding challenge.</p>
+          <a href="https://reconnecthealth.ca/blocked-duct-self-treatment/" class="blog-link" target="_blank">Read Article →</a>
+        </div>
+      </div>
+      <div class="blog-card fade-up" style="transition-delay:0.2s">
+        <div class="blog-img" style="background:linear-gradient(135deg,#e0d4da,#d4c4cc)">
+          <span class="blog-img-icon">🎗️</span>
+          <span class="blog-img-label">Women's Health</span>
+        </div>
+        <div class="blog-body">
+          <h3>Breast Cancer &amp; Pelvic Floor Symptoms</h3>
+          <p>Many medications commonly used to treat breast cancer can lead to pelvic floor symptoms including vaginal dryness, pain with sex, and urinary incontinence. Learn what to expect and how we can help.</p>
+          <a href="https://reconnecthealth.ca/breast-cancer-pelvic-floor/" class="blog-link" target="_blank">Read Article →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BAND ───────────────────────────────────── -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <p class="tag" style="color:rgba(255,255,255,0.5)">[data-theme="dark"] applicable</p>
+      <h2>Ready to reconnect with your health?</h2>
+      <p>Our team is here to support you. Book an appointment today and take the first step toward collaborative, whole-person care.</p>
+      <a href="https://reconnecthealth.ca" target="_blank" class="btn-white">📅 Book an Appointment</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER / CONTACT ───────────────────────────── -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <div class="logo-ring">
+            <svg viewBox="0 0 40 40" fill="none">
+              <circle cx="20" cy="20" r="17" stroke="var(--blue)" stroke-width="1.5" fill="none"/>
+              <circle cx="20" cy="20" r="11" stroke="var(--gold)" stroke-width="1" fill="none" opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="logo-text">ReConnect <span>health centre</span></div>
+        </div>
+        <p>We believe in a collaborative approach to your health — bringing together expert practitioners and a caring community.</p>
+        <div class="footer-socials">
+          <a href="https://facebook.com" target="_blank" class="social-btn" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" class="social-btn" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#community">Community</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col" id="team">
+        <h4>Contact Us</h4>
+        <ul>
+          <li>
+            <span class="contact-icon">📍</span>
+            <span>25 Gorge Road, Moncton, NB E1G 1B1</span>
+          </li>
+          <li>
+            <span class="contact-icon">📞</span>
+            <a href="tel:5063863650">(506) 386-3650</a>
+          </li>
+          <li>
+            <span class="contact-icon">🖷</span>
+            <span>(506) 386-3450</span>
+          </li>
+          <li>
+            <span class="contact-icon">✉️</span>
+            <a href="mailto:info@reconnecthealth.ca">info@reconnecthealth.ca</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 ReConnect Health Centre. Website by Ryan Gagné &amp; Associates.</span>
+      <span>Moncton, New Brunswick, Canada</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Theme Toggle ──────────────────────────────────
+const html = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const saved = localStorage.getItem('theme') || 'light';
+html.setAttribute('data-theme', saved);
+
+toggle.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+
+// Fix CTA band tag for dark mode
+function updateCtaTag() {
+  const theme = html.getAttribute('data-theme');
+  const tag = document.querySelector('.cta-band .tag');
+  if (tag) {
+    tag.style.display = 'none';
+  }
+}
+updateCtaTag();
+
+// ── Mobile Nav ────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  mobileNav.classList.toggle('open');
+});
+function closeMobile() { mobileNav.classList.remove('open'); }
+
+// ── Scroll animations ─────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ── Service card hover expand ─────────────────────
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    const desc = card.querySelector('.service-desc');
+    if (desc) desc.style.display = 'block';
+  });
+  card.addEventListener('mouseleave', () => {
+    const desc = card.querySelector('.service-desc');
+    if (desc) desc.style.display = 'none';
+  });
+});
+</script>
+</body>
+</html>
